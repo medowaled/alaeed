@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منار - أجمل حكاية وعيد</title>
+
+    <!-- Meta tags for Search Engine Optimization and Sharing -->
+    <meta name="description" content="موقع خاص وبطاقة تهنئة مميزة لعيد الفطر المبارك مُهداة بحب إلى منار">
+    <meta name="keywords" content="منار, عيد الفطر, تهنئة, حكايتنا, حب">
+    <meta name="author" content="شريك حياتك">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="إلى منار الغالية">
+    <meta property="og:description" content="هدية خاصة لعيد الفطر المبارك - كل عام وأنتِ عيدي">
+    <meta property="og:type" content="website">
+
+    <!-- Google Fonts for Cairo (Arabic text) and Playfair Display (numbers & romantic text) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+
+    <!-- Link to the external CSS styling -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Heart Cursor Particle Effect Canvas -->
+    <canvas id="heart-canvas"></canvas>
+
+    <!-- Splash Screen (The Entrance) -->
+    <div id="splash-screen" class="splash-container">
+        <div class="splash-content">
+            <div class="rose-icon-container">
+                <!-- Golden/Rose SVG heart icon -->
+                <svg class="pulsing-heart-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                        fill="url(#roseGradient)" />
+                    <defs>
+                        <linearGradient id="roseGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#C2185B" />
+                            <stop offset="50%" stop-color="#FFC0CB" />
+                            <stop offset="100%" stop-color="#D4AF37" />
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1 class="splash-title">مرحباً بكِ يا نبض قلبي</h1>
+            <button id="entrance-btn" class="entrance-button" aria-label="اضغطي هنا لرؤية أجمل بنت في العالم">
+                اضغطي هنا لرؤية أجمل بنت في العالم ✨
+            </button>
+
+        </div>
+    </div>
+
+    <!-- Background Music Integration -->
+    <!-- 🎵 ضع ملف الأغنية في نفس مجلد الموقع (d:\alaeed\)
+         اسم الملف يجب يكون: enti_el_wanas.mp3
+         الأغنية: "أنتي الونس" للفنان ليل
+    -->
+    <audio id="bg-audio" loop>
+        <source src="Lil-Elmohamedy-Enty-Elwanas-(Official-Video)-ليل-المحمدي-انتي-الونس-(سلفيني-عنيكي-لحظة).mp3"
+            type="audio/mpeg">
+        متصفحك لا يدعم تشغيل الموسيقى.
+    </audio>
+
+    <!-- Floating Audio Toggle Control -->
+    <button id="audio-toggle" class="audio-control-btn muted" aria-label="كتم/تفعيل الموسيقى">
+        <!-- Speaker Muted Icon (Default) -->
+        <svg id="icon-muted" class="audio-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="1" y1="1" x2="23" y2="23"></line>
+            <path
+                d="M9 9v6a3 3 0 0 0 3 3h1.586l4.707 4.707A1 1 0 0 0 20 22V4a1 1 0 0 0-1.707-.707L13.586 8H12a3 3 0 0 0-3 3z">
+            </path>
+        </svg>
+        <!-- Speaker Playing Icon -->
+        <svg id="icon-playing" class="audio-icon hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+        </svg>
+    </button>
+
+    <!-- Floating Background Words (Soft ambient elements) -->
+    <div id="ambient-words-container" class="ambient-container">
+        <!-- Floating words will be injected by JavaScript or set statically -->
+        <span class="floating-word w1">بحبك</span>
+        <span class="floating-word w2">Manar</span>
+        <span class="floating-word w3">روحي</span>
+        <span class="floating-word w4">عيدي</span>
+        <span class="floating-word w5">I Love You</span>
+        <span class="floating-word w6">يا ملاكي</span>
+        <span class="floating-word w7">حياتي</span>
+        <span class="floating-word w8">أميرتي</span>
+    </div>
+
+    <!-- Main Content Wrapper (Hidden initially, shown after splash screen fades) -->
+    <div id="main-content" class="content-wrapper hidden">
+
+        <!-- Elegant Header Navigation -->
+        <header id="main-header" class="site-header">
+            <div class="header-logo">
+                <span class="heart-symbol">♥</span> منار & احمد <span class="heart-symbol">♥</span>
+            </div>
+            <nav class="nav-links">
+                <a href="#love-counter-section">اعظم يوم في حياتي </a>
+                <a href="#gallery-section">معرض الصور</a>
+                <a href="#timeline-section">حكايتنا</a>
+                <a href="#secret-letters-section">رسائلي لكِ</a>
+                <a href="#eid-greeting-section">تهنئة العيد</a>
+            </nav>
+        </header>
+
+        <!-- Section 1: Hero & Real-time Love Counter -->
+        <section id="love-counter-section" class="hero-section">
+            <div class="hero-bg-overlay"></div>
+            <div class="hero-container">
+                <div class="sparkles-container">
+                    <span class="sparkle s1">✨</span>
+                    <span class="sparkle s2">🌸</span>
+                    <span class="sparkle s3">💖</span>
+                </div>
+                <h2 class="hero-subtitle">كل ثانية معاكي هي عيد جديد</h2>
+                <h1 class="hero-title">الوقت اللي ربنا رزقني بيكي فيه </h1>
+
+                <!-- Real-time Love Counter Container -->
+                <div class="counter-container">
+                    <div class="counter-box animate-pulse-slow">
+                        <span id="years" class="counter-value">00</span>
+                        <span class="counter-label">سنوات</span>
+                    </div>
+                    <div class="counter-box animate-pulse-slow">
+                        <span id="days" class="counter-value">00</span>
+                        <span class="counter-label">أيام</span>
+                    </div>
+                    <div class="counter-box animate-pulse-slow">
+                        <span id="hours" class="counter-value">00</span>
+                        <span class="counter-label">ساعات</span>
+                    </div>
+                    <div class="counter-box animate-pulse-slow">
+                        <span id="minutes" class="counter-value">00</span>
+                        <span class="counter-label">دقائق</span>
+                    </div>
+                    <div class="counter-box animate-pulse-slow">
+                        <span id="seconds" class="counter-value">00</span>
+                        <span class="counter-label">ثواني</span>
+                    </div>
+                </div>
+
+                <p class="counter-tagline">وما زال قلبي ينبض بكِ أكثر كل يوم... 💕</p>
+                <div class="down-arrow">
+                    <a href="#gallery-section" aria-label="انتقال إلى معرض الصور">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 5v14M19 12l-7 7-7-7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Interactive Dynamic Photo Gallery -->
+        <section id="gallery-section" class="gallery-section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">معرض أجمل تفاصيلنا</h2>
+                <div class="title-line"></div>
+                <p class="section-desc">مجموعة من الصور المحفورة في ذاكرتي لجمالكِ الطاغي</p>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-card">
+                    <img src="1751131340782.jpg" alt="تفاصيل منار الجميلة" class="gallery-img" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-card-content">
+                            <span class="gallery-icon">💖</span>
+                            <p class="gallery-caption">جمالكِ يأسر قلبي وعقلي</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-card">
+                    <img src="1751131402010.jpg" alt="عيون منار الجميلة" class="gallery-img" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-card-content">
+                            <span class="gallery-icon">✨</span>
+                            <p class="gallery-caption">عيونكِ فيها وطني وملجئي الوحيد</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-card">
+                    <img src="1751131451571.jpg" alt="ضحكة منار الغالية" class="gallery-img" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-card-content">
+                            <span class="gallery-icon">🌸</span>
+                            <p class="gallery-caption">ضحكتكِ هي النور الذي يضيء أيامي</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-card">
+                    <img src="1767279028860.jpg" alt="لحظات مع منار" class="gallery-img" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-card-content">
+                            <span class="gallery-icon">👑</span>
+                            <p class="gallery-caption">ملكتي وأميرة كل قلبي</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-card">
+                    <img src="Screenshot_٢٠٢٥٠٤٠١-٠٢٠٥١١_Chrome.jpg" alt="ذكريات رائعة" class="gallery-img"
+                        loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-card-content">
+                            <span class="gallery-icon">🔐</span>
+                            <p class="gallery-caption">كل تفصيلة صغيرة فيكِ أعشقها</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-card">
+                    <img src="WhatsApp Image 2025-05-27 at 5.52.30 PM (3).jpeg" alt="لقطات مميزة لمنار"
+                        class="gallery-img" loading="lazy">
+                    <div class="gallery-overlay">
+                        <div class="gallery-card-content">
+                            <span class="gallery-icon">💍</span>
+                            <p class="gallery-caption">حكاية حبنا محفورة في عمق روحي</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Our Timeline Section (حكايتنا) -->
+        <section id="timeline-section" class="timeline-section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">شريط ذكرياتنا (حكايتنا)</h2>
+                <div class="title-line"></div>
+                <p class="section-desc">محطات لا تُنسى وثقت خطواتنا معاً يداً بيد</p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-line"></div>
+
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">بداية تعارفنا</span>
+                        <h3 class="timeline-title">اللقاء الأول الذي غيّر حياتي</h3>
+                        <p class="timeline-desc">هنا بدأت نبضات قلبي تكتب فصلاً جديداً، يوم أن رأيت عينيكِ وتأكدت أن
+                            للجمال معنىً آخر.</p>
+                        <div class="timeline-img-container">
+                            <img src="1751131057532.jpg" alt="اللقاء الأول" class="timeline-img" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">أول ضحكة وسعادة</span>
+                        <h3 class="timeline-title">انسجامنا الجميل وضحكتنا المشتركة</h3>
+                        <p class="timeline-desc">ضحكة واحدة من شفاهكِ كفيلة بمسح كل تعب الدنيا. أدركت حينها أنكِ لستِ
+                            فقط حبيبة، بل أنتِ الأمان والونس.</p>
+                        <div class="timeline-img-container">
+                            <img src="1751131106907.jpg" alt="أول ضحكة وسعادة" class="timeline-img" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">بجانبكِ دائماً</span>
+                        <h3 class="timeline-title">الحلم المشترك والخطوات الثابتة</h3>
+                        <p class="timeline-desc">كل خطوة نخطوها معاً تقربنا أكثر من حلمنا الكبير. عهدٌ عليّ أن أظل سندكِ
+                            وحاميكِ ورفيق دربكِ للأبد.</p>
+                        <div class="timeline-img-container">
+                            <img src="1751131201112.jpg" alt="الحلم المشترك" class="timeline-img" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item timeline-right">
+                    <div class="timeline-node"></div>
+                    <div class="timeline-content">
+                        <span class="timeline-date">عيدنا معاً</span>
+                        <h3 class="timeline-title">أجمل أعيادي بقربكِ</h3>
+                        <p class="timeline-desc">عيد فطر مبارك وسعيد، تكتمل فرحته بوجودكِ جانبي. وجودكِ في حياتي هو
+                            العيد الحقيقي المستمر كل يوم.</p>
+                        <div class="timeline-img-container">
+                            <img src="1767279028860.jpg" alt="عيدنا معا" class="timeline-img" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Secret Love Letters (رسائل حب سرية) -->
+        <section id="secret-letters-section" class="letters-section scroll-reveal">
+            <div class="section-header">
+                <h2 class="section-title">رسائل من أعماق قلبي</h2>
+                <div class="title-line"></div>
+                <p class="section-desc">اضغطي على المغلفات لتقرئي ما يخبئه قلبي لكِ يا منار</p>
+            </div>
+
+            <div class="envelopes-wrapper">
+                <!-- Envelope 1 -->
+                <div class="envelope-card" data-letter="1">
+                    <div class="envelope-wrapper-inner">
+                        <div class="envelope">
+                            <div class="envelope-flap"></div>
+                            <div class="envelope-paper">
+                                <span class="paper-title">إلى منار الحبيبة</span>
+                            </div>
+                            <div class="envelope-body"></div>
+                            <div class="envelope-seal">
+                                <span class="seal-heart">♥</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="envelope-label">رسالة الشوق 💌</p>
+                </div>
+
+                <!-- Envelope 2 -->
+                <div class="envelope-card" data-letter="2">
+                    <div class="envelope-wrapper-inner">
+                        <div class="envelope">
+                            <div class="envelope-flap"></div>
+                            <div class="envelope-paper">
+                                <span class="paper-title">إلى توأم روحي</span>
+                            </div>
+                            <div class="envelope-body"></div>
+                            <div class="envelope-seal">
+                                <span class="seal-heart">♥</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="envelope-label">رسالة العهد والوعد 💍</p>
+                </div>
+
+                <!-- Envelope 3 -->
+                <div class="envelope-card" data-letter="3">
+                    <div class="envelope-wrapper-inner">
+                        <div class="envelope">
+                            <div class="envelope-flap"></div>
+                            <div class="envelope-paper">
+                                <span class="paper-title">إلى عيدي وأماني</span>
+                            </div>
+                            <div class="envelope-body"></div>
+                            <div class="envelope-seal">
+                                <span class="seal-heart">♥</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="envelope-label">رسالة العيد السعيد 🎉</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Secret Letter Detail Modal -->
+        <div id="letter-modal" class="modal-overlay" role="dialog" aria-modal="true"
+            aria-labelledby="modal-letter-title">
+            <div class="modal-card">
+                <button id="close-modal-btn" class="close-btn" aria-label="إغلاق الرسالة">&times;</button>
+                <div class="modal-letter-paper">
+                    <div class="letter-stamp">👑</div>
+                    <h3 id="modal-letter-title" class="letter-headline">عنوان الرسالة</h3>
+                    <div id="modal-letter-text" class="letter-body-text">
+                        محتوى الرسالة...
+                    </div>
+                    <div class="letter-signature">
+                        <p class="sig-title">المخلص لكِ للأبد،</p>
+                        <p class="sig-name"> حبيبكِ المفتون بجمالكِ احمد وليد </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Eid Greeting Section (Typing Effect) -->
+        <section id="eid-greeting-section" class="eid-section scroll-reveal">
+            <div class="eid-ornament-top">
+                <!-- Golden Arabic Eid lantern SVG -->
+                <svg class="lantern-svg" viewBox="0 0 100 100" fill="currentColor">
+                    <path
+                        d="M50,10 C40,25 35,40 35,55 C35,70 40,85 50,90 C60,85 65,70 65,55 C65,40 60,25 50,10 Z M50,5 C52,5 54,6 54,8 C54,10 52,12 50,12 C48,12 46,10 46,8 C46,6 48,5 50,5 Z M50,90 C45,90 40,92 40,95 C40,98 50,100 50,100 C50,100 60,98 60,95 C60,92 55,90 50,90 Z" />
+                </svg>
+            </div>
+
+            <div class="eid-card">
+                <h2 class="eid-title">تهنئة خاصة بمناسبة عيد الاضحي المبارك</h2>
+
+                <!-- Typing Effect Wrapper -->
+                <div class="typing-container">
+                    <div id="typing-text" class="typing-text"></div>
+                    <span class="typing-cursor">|</span>
+                </div>
+
+                <div class="eid-hearts">
+                    <span>❤️</span>
+                    <span>💖</span>
+                    <span>✨</span>
+                    <span>🌸</span>
+                    <span>❤️</span>
+                </div>
+            </div>
+
+            <div class="eid-ornament-bottom">
+                <!-- Decorative stars/moon -->
+                <span class="crescent-moon">🌙</span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p>صُنع بكل حب وشغف خصيصاً لأميرتي "منار" بمناسبة عيد الاضحي المبارك 🌟</p>
+            <p class="footer-copy">&copy; 2026 - جميع الحقوق محفوظة لقلبكِ الجميل</p>
+        </footer>
+
+    </div>
+
+    <!-- Inject core javascript engine -->
+    <script src="app.js"></script>
+</body>
+
+</html>
